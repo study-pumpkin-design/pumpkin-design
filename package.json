@@ -1,5 +1,5 @@
 {
-  "name": "pumpkin-design",
+  "name": "sd",
   "private": true,
   "scripts": {
     "build": "turbo run build",

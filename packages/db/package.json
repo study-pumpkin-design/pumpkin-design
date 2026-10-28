@@ -1,0 +1,24 @@
+{
+  "name": "@sd/db",
+  "module": "index.ts",
+  "type": "module",
+  "exports": {
+    ".": "./src/prisma/db.ts"
+  },
+  "devDependencies": {
+    "@prisma/cli-engine": "0.9.0",
+    "@types/bun": "latest",
+    "@types/node": "^26.6.5",
+    "prisma": "^8.0.0-rc.28"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "contract:emit": "prisma contract emit"
+  },
+  "dependencies": {
+    "@prisma/orm-postgres": "^8.0.0-rc.21",
+    "dotenv": "^18.0.9"
+  }
+}

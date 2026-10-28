@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@sd/ui",
   "version": "0.0.0",
   "private": true,
   "exports": {
@@ -11,8 +11,6 @@
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
