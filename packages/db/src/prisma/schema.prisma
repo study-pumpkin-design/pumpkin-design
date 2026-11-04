@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+  runtime  = "bun"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                  String        @id @default(uuid())
+  email               String        @unique
+  username            String        @unique
+  password            String
+  salt                String
+  name                String?
+  phone_number        String?       @unique
+  points              BigInt        @default(0)
+  profile_pic         String        @default("")
+  headline            String        @default("")
+  bio                 String        @default("")
+  rank                String        @default("BEGINNER")
+  user_type           String        @default("GUEST_ACCOUNT")
+  last_login_timestamp DateTime     @default(now())
+  groupMembers        GroupMembers[]
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+}
+
+model Moderator {
+  id             String         @id @default(uuid())
+  email          String         @unique
+  username       String         @unique
+  phone_number   String?        @unique
+  name           String?
+  password       String
+  salt           String
+  moderator_type String         @default("CONTENT")
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Group {
+  id           String         @id @default(uuid())
+  name         String
+  description  String         @default("")
+  group_icon   String         @default("")
+  groupMembers GroupMembers[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model GroupMembers {
+  id         String     @id @default(uuid())
+  group_id   String
+  member_id  String
+  group_role String     @default("MEMBER")
+  group      Group      @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  member     User       @relation(fields: [member_id], references: [id], onDelete: Cascade)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}

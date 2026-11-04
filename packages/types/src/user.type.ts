@@ -1,0 +1,19 @@
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+  password: string;
+  salt: string;
+  name: string | null;
+  phone_number: string | null;
+  points: bigint;
+  profile_pic: string;
+  headline: string;
+  bio: string;
+  rank: string;
+  user_type: string;
+  last_login_timestamp: Date;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type createUserDTO = Pick<User, "email" | "username" | "password">;
