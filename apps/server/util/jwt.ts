@@ -21,6 +21,6 @@ export function verifyAccessToken(accessToken: string) {
       process.env.JWT_ACCESS_SECRET as string,
     ) as JwtPayload;
   } catch (error) {
-    throw new Error("invalid or expired access token");
+    throw new Error("JWT_VERIFICATION_FAILIURE");
   }
 }

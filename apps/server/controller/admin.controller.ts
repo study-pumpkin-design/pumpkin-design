@@ -8,11 +8,14 @@ class AdminController {
   async createAdmin(req: Request, res: Response) {
     try {
       const data: adminTypes.createAdminDTO = req.body;
+
       if (!validateInput(data)) throw new Error("INCORRECT_INPUT_DATA");
+
       const createdAdmin = await adminService.createAdminAccount(
         data,
         req.user.email,
       );
+
       return res
         .status(200)
         .json({ data: createdAdmin, message: "success", statusCode: 200 });

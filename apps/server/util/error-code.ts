@@ -8,4 +8,6 @@ export const ERROR_CODES = {
     DUPLICATE_USER_CREATION: "user already exists",
   },
   INCORRECT_INPUT_DATA: "invalid input",
+  JWT_VERIFICATION_FAILIURE: "failed to verify authentication",
+  NO_VALID_TOKEN_FOUND: "missing authentication token",
 };
