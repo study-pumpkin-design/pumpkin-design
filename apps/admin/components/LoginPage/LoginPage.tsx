@@ -1,6 +1,6 @@
 import axios from "axios";
 import Image from "next/image";
-import logo from "@/public/vercel.svg";
+import logo from "@/public/logo.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useMemo, useState, type FormEventHandler } from "react";
 import axiosInstance from "@/app/lib/axiosInstance";
@@ -77,23 +77,16 @@ function LoginPage() {
     <main className="min-h-screen bg-custom-bg px-6 py-12 text-slate-900">
       <section className="mx-auto flex min-h-[calc(100vh-6rem)] max-w-md flex-col justify-center">
         <div className="mb-8 text-center">
-          <div
-            className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-custom-purple shadow-lg shadow-custom-purple/25"
-            aria-label="Pumpkin logo"
-          >
-            <Image
-              src={logo}
-              alt="website-logo"
-              height={200}
-              width={200}
-              className="h-10 w-10 text-white"
-              aria-hidden="true"
-            />
-          </div>
-          <h1 className="mt-5 text-3xl font-bold tracking-tight">
-            Pumpkin Design
-          </h1>
-          <p className="mt-2 text-sm text-slate-600">
+          <Image
+            src={logo}
+            alt="website-logo"
+            height={500}
+            width={500}
+            className="h-40 w-40 text-white mx-auto"
+            aria-hidden="true"
+          />
+
+          <p className="mt-2 text-xl text-slate-900">
             Log in to access the dashboard
           </p>
         </div>

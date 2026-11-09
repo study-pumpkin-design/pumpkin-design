@@ -4,6 +4,10 @@ import type { NextRequest } from "next/server";
 export function proxy(request: NextRequest) {
   try {
     const { pathname } = request.nextUrl;
+    if (pathname.startsWith("/_next/") || pathname.includes(".")) {
+      return NextResponse.next();
+    }
+
     const PRIVATE_ROUTES = ["/admin-dashboard"];
     const PUBLIC_ROUTES = ["/login"];
     if (PUBLIC_ROUTES.includes(pathname)) {
