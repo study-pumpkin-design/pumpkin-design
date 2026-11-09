@@ -7,7 +7,11 @@ export const ERROR_CODES = {
   user: {
     DUPLICATE_USER_CREATION: "user already exists",
   },
+  mail: {
+    CLASS_INITIALIZATION_ERROR: "error in class instantiation",
+  },
   INCORRECT_INPUT_DATA: "invalid input",
   JWT_VERIFICATION_FAILIURE: "failed to verify authentication",
   NO_VALID_TOKEN_FOUND: "missing authentication token",
+  INVALID_STATE_INTENT: "malicious activity detected",
 };

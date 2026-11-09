@@ -38,10 +38,11 @@ export type UserMinAggregateOutputType = {
   id: string | null
   email: string | null
   username: string | null
+  phone_number: string | null
   password: string | null
   salt: string | null
   name: string | null
-  phone_number: string | null
+  email_verification: string | null
   points: bigint | null
   profile_pic: string | null
   headline: string | null
@@ -57,10 +58,11 @@ export type UserMaxAggregateOutputType = {
   id: string | null
   email: string | null
   username: string | null
+  phone_number: string | null
   password: string | null
   salt: string | null
   name: string | null
-  phone_number: string | null
+  email_verification: string | null
   points: bigint | null
   profile_pic: string | null
   headline: string | null
@@ -76,10 +78,11 @@ export type UserCountAggregateOutputType = {
   id: number
   email: number
   username: number
+  phone_number: number
   password: number
   salt: number
   name: number
-  phone_number: number
+  email_verification: number
   points: number
   profile_pic: number
   headline: number
@@ -105,10 +108,11 @@ export type UserMinAggregateInputType = {
   id?: true
   email?: true
   username?: true
+  phone_number?: true
   password?: true
   salt?: true
   name?: true
-  phone_number?: true
+  email_verification?: true
   points?: true
   profile_pic?: true
   headline?: true
@@ -124,10 +128,11 @@ export type UserMaxAggregateInputType = {
   id?: true
   email?: true
   username?: true
+  phone_number?: true
   password?: true
   salt?: true
   name?: true
-  phone_number?: true
+  email_verification?: true
   points?: true
   profile_pic?: true
   headline?: true
@@ -143,10 +148,11 @@ export type UserCountAggregateInputType = {
   id?: true
   email?: true
   username?: true
+  phone_number?: true
   password?: true
   salt?: true
   name?: true
-  phone_number?: true
+  email_verification?: true
   points?: true
   profile_pic?: true
   headline?: true
@@ -249,10 +255,11 @@ export type UserGroupByOutputType = {
   id: string
   email: string
   username: string
+  phone_number: string | null
   password: string
   salt: string
   name: string | null
-  phone_number: string | null
+  email_verification: string
   points: bigint
   profile_pic: string
   headline: string
@@ -291,10 +298,11 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
+  phone_number?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringFilter<"User"> | string
   salt?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
-  phone_number?: Prisma.StringNullableFilter<"User"> | string | null
+  email_verification?: Prisma.StringFilter<"User"> | string
   points?: Prisma.BigIntFilter<"User"> | bigint | number
   profile_pic?: Prisma.StringFilter<"User"> | string
   headline?: Prisma.StringFilter<"User"> | string
@@ -311,10 +319,11 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  phone_number?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrder
   salt?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  email_verification?: Prisma.SortOrder
   points?: Prisma.SortOrder
   profile_pic?: Prisma.SortOrder
   headline?: Prisma.SortOrder
@@ -338,6 +347,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   salt?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  email_verification?: Prisma.StringFilter<"User"> | string
   points?: Prisma.BigIntFilter<"User"> | bigint | number
   profile_pic?: Prisma.StringFilter<"User"> | string
   headline?: Prisma.StringFilter<"User"> | string
@@ -354,10 +364,11 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  phone_number?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrder
   salt?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  email_verification?: Prisma.SortOrder
   points?: Prisma.SortOrder
   profile_pic?: Prisma.SortOrder
   headline?: Prisma.SortOrder
@@ -381,10 +392,11 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
+  phone_number?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   salt?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  phone_number?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  email_verification?: Prisma.StringWithAggregatesFilter<"User"> | string
   points?: Prisma.BigIntWithAggregatesFilter<"User"> | bigint | number
   profile_pic?: Prisma.StringWithAggregatesFilter<"User"> | string
   headline?: Prisma.StringWithAggregatesFilter<"User"> | string
@@ -400,10 +412,11 @@ export type UserCreateInput = {
   id?: string
   email: string
   username: string
+  phone_number?: string | null
   password: string
   salt: string
   name?: string | null
-  phone_number?: string | null
+  email_verification?: string
   points?: bigint | number
   profile_pic?: string
   headline?: string
@@ -420,10 +433,11 @@ export type UserUncheckedCreateInput = {
   id?: string
   email: string
   username: string
+  phone_number?: string | null
   password: string
   salt: string
   name?: string | null
-  phone_number?: string | null
+  email_verification?: string
   points?: bigint | number
   profile_pic?: string
   headline?: string
@@ -440,10 +454,11 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -460,10 +475,11 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -480,10 +496,11 @@ export type UserCreateManyInput = {
   id?: string
   email: string
   username: string
+  phone_number?: string | null
   password: string
   salt: string
   name?: string | null
-  phone_number?: string | null
+  email_verification?: string
   points?: bigint | number
   profile_pic?: string
   headline?: string
@@ -499,10 +516,11 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -518,10 +536,11 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -537,10 +556,11 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  phone_number?: Prisma.SortOrder
   password?: Prisma.SortOrder
   salt?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  phone_number?: Prisma.SortOrder
+  email_verification?: Prisma.SortOrder
   points?: Prisma.SortOrder
   profile_pic?: Prisma.SortOrder
   headline?: Prisma.SortOrder
@@ -560,10 +580,11 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  phone_number?: Prisma.SortOrder
   password?: Prisma.SortOrder
   salt?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  phone_number?: Prisma.SortOrder
+  email_verification?: Prisma.SortOrder
   points?: Prisma.SortOrder
   profile_pic?: Prisma.SortOrder
   headline?: Prisma.SortOrder
@@ -579,10 +600,11 @@ export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
+  phone_number?: Prisma.SortOrder
   password?: Prisma.SortOrder
   salt?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  phone_number?: Prisma.SortOrder
+  email_verification?: Prisma.SortOrder
   points?: Prisma.SortOrder
   profile_pic?: Prisma.SortOrder
   headline?: Prisma.SortOrder
@@ -641,10 +663,11 @@ export type UserCreateWithoutGroupMembersInput = {
   id?: string
   email: string
   username: string
+  phone_number?: string | null
   password: string
   salt: string
   name?: string | null
-  phone_number?: string | null
+  email_verification?: string
   points?: bigint | number
   profile_pic?: string
   headline?: string
@@ -660,10 +683,11 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   id?: string
   email: string
   username: string
+  phone_number?: string | null
   password: string
   salt: string
   name?: string | null
-  phone_number?: string | null
+  email_verification?: string
   points?: bigint | number
   profile_pic?: string
   headline?: string
@@ -695,10 +719,11 @@ export type UserUpdateWithoutGroupMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -714,10 +739,11 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
+  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.StringFieldUpdateOperationsInput | string
   salt?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email_verification?: Prisma.StringFieldUpdateOperationsInput | string
   points?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   profile_pic?: Prisma.StringFieldUpdateOperationsInput | string
   headline?: Prisma.StringFieldUpdateOperationsInput | string
@@ -764,10 +790,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   email?: boolean
   username?: boolean
+  phone_number?: boolean
   password?: boolean
   salt?: boolean
   name?: boolean
-  phone_number?: boolean
+  email_verification?: boolean
   points?: boolean
   profile_pic?: boolean
   headline?: boolean
@@ -785,10 +812,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   username?: boolean
+  phone_number?: boolean
   password?: boolean
   salt?: boolean
   name?: boolean
-  phone_number?: boolean
+  email_verification?: boolean
   points?: boolean
   profile_pic?: boolean
   headline?: boolean
@@ -804,10 +832,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   username?: boolean
+  phone_number?: boolean
   password?: boolean
   salt?: boolean
   name?: boolean
-  phone_number?: boolean
+  email_verification?: boolean
   points?: boolean
   profile_pic?: boolean
   headline?: boolean
@@ -823,10 +852,11 @@ export type UserSelectScalar = {
   id?: boolean
   email?: boolean
   username?: boolean
+  phone_number?: boolean
   password?: boolean
   salt?: boolean
   name?: boolean
-  phone_number?: boolean
+  email_verification?: boolean
   points?: boolean
   profile_pic?: boolean
   headline?: boolean
@@ -838,7 +868,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "password" | "salt" | "name" | "phone_number" | "points" | "profile_pic" | "headline" | "bio" | "rank" | "user_type" | "last_login_timestamp" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "phone_number" | "password" | "salt" | "name" | "email_verification" | "points" | "profile_pic" | "headline" | "bio" | "rank" | "user_type" | "last_login_timestamp" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   groupMembers?: boolean | Prisma.User$groupMembersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -855,10 +885,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     email: string
     username: string
+    phone_number: string | null
     password: string
     salt: string
     name: string | null
-    phone_number: string | null
+    email_verification: string
     points: bigint
     profile_pic: string
     headline: string
@@ -1295,10 +1326,11 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
+  readonly phone_number: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly salt: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
-  readonly phone_number: Prisma.FieldRef<"User", 'String'>
+  readonly email_verification: Prisma.FieldRef<"User", 'String'>
   readonly points: Prisma.FieldRef<"User", 'BigInt'>
   readonly profile_pic: Prisma.FieldRef<"User", 'String'>
   readonly headline: Prisma.FieldRef<"User", 'String'>

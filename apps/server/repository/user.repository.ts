@@ -14,6 +14,14 @@ class UserRepository {
       },
     });
   }
+  async updateUser(userId: string, changes: Partial<userTypes.User>) {
+    return await db.user.update({
+      where: {
+        email: userId,
+      },
+      data: changes,
+    });
+  }
   async getUser(userId: string, includeSensitive: boolean = false) {
     const dbUser = await db.user.findFirst({
       where: {

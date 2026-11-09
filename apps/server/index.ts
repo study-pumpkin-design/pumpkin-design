@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 import type { JwtPayload } from "@sd/types";
 import adminRouter from "./route/admin.route";
 import authRouter from "./route/auth.route";
+import userRouter from "./route/user.route";
 dotenv.config({ path: "../.env" });
 
 const app: Express = express();
@@ -79,8 +80,9 @@ declare global {
   }
 }
 // routes
-app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/user", userRouter);
 
 app.use((req, res) => {
   res.status(404).json({

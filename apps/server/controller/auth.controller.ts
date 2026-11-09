@@ -1,11 +1,8 @@
 import type { Request, Response } from "express";
 import type { loginTypes, userTypes } from "@sd/types";
-import { generateAccessToken } from "../util/jwt";
-import adminService from "../service/admin.service";
-import { comparePassword } from "../util/password";
-import userService from "../service/user.service";
-import { validateInput } from "../util/validator";
+import authService from "../service/auth.service";
 import { ERROR_CODES } from "../util/error-code";
+import { validateInput } from "../util/validator";
 
 class AuthController {
   constructor() {
@@ -17,13 +14,8 @@ class AuthController {
   async adminLogin(req: Request, res: Response) {
     try {
       const credentials: loginTypes.LoginDTO = req.body;
+      const token = await authService.adminLogin(credentials);
 
-      const loginAccount = await this.checkCredentials(credentials, "ADMIN");
-      if (loginAccount == null) {
-        throw new Error("FAILED_AUTHENTICATION_ERROR");
-      }
-
-      const token = await generateAccessToken(loginAccount, "ADMIN");
       res.appendHeader(
         "Set-Cookie",
         `token=${token}; HttpOnly; Secure=${process.env.NODE_ENV === "production"}; Path=/; Max-Age=60*60*24`,
@@ -45,6 +37,7 @@ class AuthController {
       });
     }
   }
+
   async userSignup(req: Request, res: Response) {
     try {
       const data: userTypes.createUserDTO = req.body;
@@ -57,11 +50,8 @@ class AuthController {
         throw new Error("INCORRECT_INPUT_DATA");
       }
 
-      const createdUser = await userService.createUserAccount(data);
-      const token = await generateAccessToken(
-        { email: createdUser.email },
-        "USER",
-      );
+      const { createdUser, token } = await authService.userSignup(data);
+
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -99,17 +89,12 @@ class AuthController {
       });
     }
   }
+
   async userLogin(req: Request, res: Response) {
     try {
       const credentials: loginTypes.LoginDTO = req.body;
+      const token = await authService.userLogin(credentials);
 
-      const loginAccount = await this.checkCredentials(credentials, "USER");
-
-      if (loginAccount == null) {
-        throw new Error("FAILED_AUTHENTICATION_ERROR");
-      }
-
-      const token = await generateAccessToken(loginAccount, "USER");
       res.appendHeader(
         "Set-Cookie",
         `token=${token}; HttpOnly; Secure=${process.env.NODE_ENV === "production"}; Path=/; Max-Age=60*60*24*7`,
@@ -132,47 +117,70 @@ class AuthController {
     }
   }
 
-  async checkCredentials(
-    credentials: loginTypes.LoginDTO,
-    accountType: "ADMIN" | "USER" = "USER",
-  ) {
-    let account = { email: "" };
-    let isAuthenticated = false;
+  async initiateResetPassword(req: Request, res: Response) {
+    try {
+      const { email } = req.body;
+      if (email.trim().length === 0) throw new Error("INVALID_INPUT");
 
-    if (accountType == "ADMIN") {
-      const dbAdmin = await adminService.getAdminDetails(
-        credentials.email ?? credentials.username ?? "",
-        true,
-      );
+      await authService.initiateResetPassword(email);
 
-      isAuthenticated = await comparePassword(
-        credentials.password,
-        // @ts-ignore
-        dbAdmin.password,
-        // @ts-ignore
-        dbAdmin.salt,
-      );
+      return res.status(204).json({
+        data: null,
+        message: "OTP sent to email",
+        statusCode: 204,
+      });
+    } catch (error: any) {
+      console.error(error);
+      let message = "Internal Server Error";
 
-      account.email = dbAdmin!.email;
-    } else if (accountType == "USER") {
-      const dbUser = await userService.getUserDetails(
-        credentials.email ?? credentials.username ?? "",
-        true,
-      );
-
-      isAuthenticated = await comparePassword(
-        credentials.password,
-        // @ts-ignore
-        dbUser.password,
-        // @ts-ignore
-        dbUser.salt,
-      );
-
-      account.email = dbUser!.email;
+      return res.status(500).json({
+        data: null,
+        statusCode: 500,
+        message,
+      });
     }
+  }
 
-    return isAuthenticated ? { email: account?.email } : null;
+  async verifyResetPassword(req: Request, res: Response) {
+    try {
+      const { email, otp } = req.body;
+      if (email.trim().length === 0) throw new Error("INVALID_INPUT");
+      if (otp.trim().length === 0) throw new Error("INVALID_INPUT");
+
+      await authService.verifyResetPassword(email, otp);
+
+      return res.status(204).json({
+        data: null,
+        message: "OTP verified",
+        statusCode: 204,
+      });
+    } catch (error: any) {
+      console.error(error);
+      let message = "Internal Server Error";
+
+      return res.status(500).json({
+        data: null,
+        message,
+        statusCode: 500,
+      });
+    }
+  }
+
+  async resetPassword(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    if (email.trim().length === 0) throw new Error("INVALID_INPUT");
+    if (password.trim().length === 0) throw new Error("INVALID_INPUT");
+
+    await authService.resetPassword(email, password);
+
+    return res.status(204).json({
+      data: null,
+      statusCode: 204,
+      message: "Password reset successful",
+    });
   }
 }
+
 const authController = new AuthController();
 export default authController;

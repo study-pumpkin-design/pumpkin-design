@@ -11,6 +11,7 @@ export type User = {
   headline: string;
   bio: string;
   rank: string;
+  email_verification: string;
   user_type: string;
   last_login_timestamp: Date;
   createdAt: Date;
