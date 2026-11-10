@@ -62,3 +62,30 @@ model GroupMembers {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+
+model Course {
+  id                String   @id @default(uuid())
+  name              String
+  description       String
+  learning_outcomes String[]
+  course_topics     String[]
+  modules           Module[]
+}
+
+model Module {
+  id       String @id @default(uuid())
+  name     String
+  courseId String
+  course   Course @relation(references: [id], fields: [courseId], onDelete: Cascade)
+}
+
+model ModuleContent {
+  id                 String @id @default(uuid())
+  title              String
+  description        String
+  text_content       String
+  attached_media     String
+  video_content      String
+  video_thumbnail    String
+  content_visibility String @default("PREVIEW")
+}

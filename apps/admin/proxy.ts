@@ -8,19 +8,20 @@ export function proxy(request: NextRequest) {
       return NextResponse.next();
     }
 
-    const PRIVATE_ROUTES = ["/admin-dashboard"];
+    const PRIVATE_ROUTES = ["/admin-dashboard", "/admin-dashboard/courses"];
     const PUBLIC_ROUTES = ["/login"];
     if (PUBLIC_ROUTES.includes(pathname)) {
       return NextResponse.next();
     }
 
     const token = request.cookies.get("token")?.value;
-    console.log("login token", token);
-    if (!token && PRIVATE_ROUTES.includes(pathname))
-      return NextResponse.redirect(new URL("/login", request.url));
+
+    if (PRIVATE_ROUTES.includes(pathname) && token) {
+      return NextResponse.next();
+    }
 
     return NextResponse.redirect(new URL("/login", request.url));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log(error);
     return NextResponse.redirect(new URL("/login", request.url));
   }

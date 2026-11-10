@@ -5,6 +5,25 @@ import adminService from "../service/admin.service";
 import { ERROR_CODES } from "../util/error-code";
 
 class AdminController {
+  async getCurrentAdmin(req: Request, res: Response) {
+    try {
+      const admin = await adminService.getAdminDetails(req.user.email, false);
+
+      return res.status(200).json({
+        data: admin,
+        message: "success",
+        statusCode: 200,
+      });
+    } catch (error: any) {
+      const message =
+        error.message === "UNPERMITTED_ACTION_NOT_AN_ADMIN"
+          ? ERROR_CODES.admin.UNPERMITTED_ACTION_NOT_AN_ADMIN
+          : "Internal Server Error";
+
+      return res.status(500).json({ data: null, message, statusCode: 500 });
+    }
+  }
+
   async createAdmin(req: Request, res: Response) {
     try {
       const data: adminTypes.createAdminDTO = req.body;

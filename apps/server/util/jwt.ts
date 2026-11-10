@@ -20,7 +20,8 @@ export function verifyAccessToken(accessToken: string) {
       accessToken,
       process.env.JWT_ACCESS_SECRET as string,
     ) as JwtPayload;
-  } catch (error) {
+  } catch (error: any) {
+    console.log(error.message);
     throw new Error("JWT_VERIFICATION_FAILIURE");
   }
 }

@@ -22,9 +22,9 @@ class AdminService {
     });
   }
 
-  async getAdminDetails(adminId: string, includeSensitive: boolean) {
+  async getAdminDetails(adminId: string, includeSensitive: boolean = false) {
     await this.checkIsAdmin(adminId);
-    const dbAdmin = adminRepository.getAdmin(adminId, includeSensitive);
+    const dbAdmin = await adminRepository.getAdmin(adminId, includeSensitive);
     if (dbAdmin == null) {
       throw new Error("NO_ADMIN_FOUND");
     }
