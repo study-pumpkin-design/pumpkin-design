@@ -9,7 +9,17 @@
 * 🟢 You can import this file directly.
 */
 
+export const StorageMedium = {
+  AWS: 'AWS',
+  CLOUDINARY: 'CLOUDINARY'
+} as const
+
+export type StorageMedium = (typeof StorageMedium)[keyof typeof StorageMedium]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const PUBLISH_STATUS = {
+  UN_PUBLISHED: 'UN_PUBLISHED',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type PUBLISH_STATUS = (typeof PUBLISH_STATUS)[keyof typeof PUBLISH_STATUS]

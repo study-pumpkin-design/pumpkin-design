@@ -54,7 +54,11 @@ export const ModelName = {
   User: 'User',
   Moderator: 'Moderator',
   Group: 'Group',
-  GroupMembers: 'GroupMembers'
+  GroupMembers: 'GroupMembers',
+  Course: 'Course',
+  Module: 'Module',
+  ModuleContent: 'ModuleContent',
+  MediaAsset: 'MediaAsset'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -134,6 +138,61 @@ export const GroupMembersScalarFieldEnum = {
 } as const
 
 export type GroupMembersScalarFieldEnum = (typeof GroupMembersScalarFieldEnum)[keyof typeof GroupMembersScalarFieldEnum]
+
+
+export const CourseScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  learning_outcomes: 'learning_outcomes',
+  course_topics: 'course_topics',
+  publish_status: 'publish_status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
+
+
+export const ModuleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  courseId: 'courseId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ModuleScalarFieldEnum = (typeof ModuleScalarFieldEnum)[keyof typeof ModuleScalarFieldEnum]
+
+
+export const ModuleContentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  module_id: 'module_id',
+  text_content: 'text_content',
+  video_content: 'video_content',
+  attached_media: 'attached_media',
+  video_thumbnail: 'video_thumbnail',
+  content_visibility: 'content_visibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ModuleContentScalarFieldEnum = (typeof ModuleContentScalarFieldEnum)[keyof typeof ModuleContentScalarFieldEnum]
+
+
+export const MediaAssetScalarFieldEnum = {
+  id: 'id',
+  assetId: 'assetId',
+  storage_medium: 'storage_medium',
+  original_name: 'original_name',
+  mime_type: 'mime_type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
 
 
 export const SortOrder = {

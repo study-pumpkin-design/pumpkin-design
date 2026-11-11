@@ -137,6 +137,40 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type EnumPUBLISH_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.PUBLISH_STATUS | Prisma.EnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel> | $Enums.PUBLISH_STATUS
+}
+
+export type EnumPUBLISH_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PUBLISH_STATUS | Prisma.EnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPUBLISH_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.PUBLISH_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel>
+}
+
+export type EnumStorageMediumFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageMedium | Prisma.EnumStorageMediumFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel> | $Enums.StorageMedium
+}
+
+export type EnumStorageMediumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageMedium | Prisma.EnumStorageMediumFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageMediumWithAggregatesFilter<$PrismaModel> | $Enums.StorageMedium
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -282,6 +316,40 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
+}
+
+export type NestedEnumPUBLISH_STATUSFilter<$PrismaModel = never> = {
+  equals?: $Enums.PUBLISH_STATUS | Prisma.EnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel> | $Enums.PUBLISH_STATUS
+}
+
+export type NestedEnumPUBLISH_STATUSWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PUBLISH_STATUS | Prisma.EnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  in?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PUBLISH_STATUS[] | Prisma.ListEnumPUBLISH_STATUSFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPUBLISH_STATUSWithAggregatesFilter<$PrismaModel> | $Enums.PUBLISH_STATUS
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPUBLISH_STATUSFilter<$PrismaModel>
+}
+
+export type NestedEnumStorageMediumFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageMedium | Prisma.EnumStorageMediumFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel> | $Enums.StorageMedium
+}
+
+export type NestedEnumStorageMediumWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StorageMedium | Prisma.EnumStorageMediumFieldRefInput<$PrismaModel>
+  in?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  notIn?: $Enums.StorageMedium[] | Prisma.ListEnumStorageMediumFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumStorageMediumWithAggregatesFilter<$PrismaModel> | $Enums.StorageMedium
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStorageMediumFilter<$PrismaModel>
 }
 
 

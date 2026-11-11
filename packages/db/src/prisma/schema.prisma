@@ -8,6 +8,16 @@ datasource db {
   provider = "postgresql"
 }
 
+enum StorageMedium {
+  AWS
+  CLOUDINARY
+}
+
+enum PUBLISH_STATUS {
+  UN_PUBLISHED
+  PUBLISHED
+}
+
 model User {
   id                   String         @id @default(uuid())
   email                String         @unique
@@ -64,28 +74,55 @@ model GroupMembers {
 }
 
 model Course {
-  id                String   @id @default(uuid())
+  id                String         @id @default(uuid())
   name              String
   description       String
   learning_outcomes String[]
   course_topics     String[]
   modules           Module[]
+  publish_status    PUBLISH_STATUS @default(UN_PUBLISHED)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 }
 
 model Module {
-  id       String @id @default(uuid())
-  name     String
-  courseId String
-  course   Course @relation(references: [id], fields: [courseId], onDelete: Cascade)
+  id             String          @id @default(uuid())
+  name           String
+  courseId       String
+  course         Course          @relation(references: [id], fields: [courseId], onDelete: Cascade)
+  moduleContents ModuleContent[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
 model ModuleContent {
-  id                 String @id @default(uuid())
+  id                 String      @id @default(uuid())
   title              String
-  description        String
-  text_content       String
-  attached_media     String
-  video_content      String
-  video_thumbnail    String
-  content_visibility String @default("PREVIEW")
+  description        String?
+  module_id          String
+  text_content       String?
+  video_content      String?
+  attached_media     String?
+  video_thumbnail    String?
+  content_visibility String      @default("PREVIEW")
+  module             Module      @relation(fields: [module_id], references: [id], onDelete: Cascade)
+  attachment         MediaAsset? @relation("ModuleAttachments", fields: [attached_media], references: [id], onDelete: SetNull)
+  video              MediaAsset? @relation("ModuleVideos", fields: [video_content], references: [id], onDelete: SetNull)
+  thumbnail          MediaAsset? @relation("ModuleThumbnails", fields: [video_thumbnail], references: [id], onDelete: SetNull)
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+}
+
+model MediaAsset {
+  id             String        @id @default(uuid())
+  assetId        String
+  storage_medium StorageMedium
+  original_name  String
+  mime_type      String
+
+  moduleAttachments ModuleContent[] @relation("ModuleAttachments")
+  moduleVideos      ModuleContent[] @relation("ModuleVideos")
+  moduleThumbnails  ModuleContent[] @relation("ModuleThumbnails")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
 }

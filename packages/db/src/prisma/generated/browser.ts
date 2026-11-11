@@ -37,3 +37,23 @@ export type Group = Prisma.GroupModel
  * 
  */
 export type GroupMembers = Prisma.GroupMembersModel
+/**
+ * Model Course
+ * 
+ */
+export type Course = Prisma.CourseModel
+/**
+ * Model Module
+ * 
+ */
+export type Module = Prisma.ModuleModel
+/**
+ * Model ModuleContent
+ * 
+ */
+export type ModuleContent = Prisma.ModuleContentModel
+/**
+ * Model MediaAsset
+ * 
+ */
+export type MediaAsset = Prisma.MediaAssetModel

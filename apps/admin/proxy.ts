@@ -16,7 +16,7 @@ export function proxy(request: NextRequest) {
 
     const token = request.cookies.get("token")?.value;
 
-    if (PRIVATE_ROUTES.includes(pathname) && token) {
+    if (PRIVATE_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`)) && token) {
       return NextResponse.next();
     }
 
