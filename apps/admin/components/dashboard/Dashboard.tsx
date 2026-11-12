@@ -8,7 +8,9 @@ function Dashboard() {
 
   return (
     <section className="mx-auto w-full max-w-6xl">
-      <p className="text-sm font-semibold text-custom-purple">Admin workspace</p>
+      <p className="text-sm font-semibold text-custom-purple">
+        Admin workspace
+      </p>
       <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
         {name ? `Welcome back, ${name}` : "Admin dashboard"}
       </h1>

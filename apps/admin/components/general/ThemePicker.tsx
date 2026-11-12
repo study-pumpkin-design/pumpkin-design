@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Monitor,
-  Moon,
-  Sun,
-} from "lucide-react";
-import {
-  startTransition,
-  useEffect,
-  useState,
-} from "react";
+import { Monitor, Moon, Sun } from "lucide-react";
+import { startTransition, useEffect, useState } from "react";
 
 type Theme = "light" | "dark" | "system";
 

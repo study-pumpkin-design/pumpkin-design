@@ -6,7 +6,8 @@
     ".": "./index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/multer": "^2.3.0"
   },
   "peerDependencies": {
     "typescript": "^5"

@@ -30,6 +30,17 @@ class CourseRepository {
   async getCourse(condition: any) {
     const dbCourse = await db.course.findUnique({
       where: condition,
+      include: {
+        modules: {
+          include: {
+            moduleContents: {
+              include: { attachment: true, video: true, thumbnail: true },
+              orderBy: { createdAt: "asc" },
+            },
+          },
+          orderBy: { createdAt: "asc" },
+        },
+      },
     });
 
     if (dbCourse == null) throw new Error("INVALID_COURSE_ID");

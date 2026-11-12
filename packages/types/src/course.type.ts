@@ -22,7 +22,9 @@ export interface Module {
   name: string;
   courseId: string;
   course?: Course;
+  /** @deprecated Use moduleContents, which matches the Prisma relation name. */
   contents?: ModuleContent[];
+  moduleContents?: ModuleContent[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -42,6 +44,24 @@ export interface ModuleContent {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type CreateModuleDTO = Pick<Module, "name" | "courseId">;
+export type UpdateModuleDTO = Partial<Pick<Module, "name">>;
+
+export type CreateModuleContentDTO = Pick<
+  ModuleContent,
+  | "title"
+  | "description"
+  | "text_content"
+  | "video_content"
+  | "attached_media"
+  | "video_thumbnail"
+  | "content_visibility"
+> & { module_id: string };
+
+export type UpdateModuleContentDTO = Partial<
+  Omit<CreateModuleContentDTO, "module_id">
+>;
 
 export interface MediaAsset {
   id: string;

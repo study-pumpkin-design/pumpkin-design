@@ -2,34 +2,48 @@ import { uploadTypes } from "@sd/types";
 import S3Provider from "./s3.service";
 import CloudinaryProvider from "./cloudinary.service";
 class MediaService implements uploadTypes.IMediaFactory {
-  private provider: uploadTypes.IMediaFactory | null = null;
-  constructor(provider: uploadTypes.StorageProvider) {
+  private provider: uploadTypes.StorageProvider | null;
+
+  constructor(provider?: uploadTypes.StorageProvider) {
+    this.provider = provider ?? null;
+  }
+
+  private createProvider(provider: uploadTypes.StorageProvider): uploadTypes.IMediaFactory {
     switch (provider) {
       case uploadTypes.StorageProvider.AWS_S3:
-        this.provider = new S3Provider();
-        break;
+        return new S3Provider();
       case uploadTypes.StorageProvider.CLOUDINARY:
-        this.provider = new CloudinaryProvider();
-        break;
+        return new CloudinaryProvider();
     }
+
+    throw new Error("UNINSTANTIATED_CLASS");
   }
+
+  private selectUploadProvider(mimeType: string): uploadTypes.StorageProvider {
+    return mimeType.startsWith("image/")
+      ? uploadTypes.StorageProvider.CLOUDINARY
+      : uploadTypes.StorageProvider.AWS_S3;
+  }
+
+  private getConfiguredProvider() {
+    if (this.provider == null) throw new Error("UNINSTANTIATED_CLASS");
+    return this.createProvider(this.provider);
+  }
+
   async uploadAsset(
     input: uploadTypes.IUploadAsset,
   ): Promise<uploadTypes.IAssetResponse> {
-    if (this.provider == null) throw new Error("UNINSTANTIATED_CLASS");
-    return await this.provider?.uploadAsset(input);
+    const provider = this.provider ?? this.selectUploadProvider(input.contentType || input.file.mimetype);
+    return this.createProvider(provider).uploadAsset(input);
   }
   async getSignedURL(assetId: string, expiresIn?: number): Promise<string> {
-    if (this.provider == null) throw new Error("UNINSTANTIATED_CLASS");
-    return await this.provider?.getSignedURL(assetId, expiresIn);
+    return this.getConfiguredProvider().getSignedURL(assetId, expiresIn);
   }
   async deleteAsset(assetId: string): Promise<void> {
-    if (this.provider == null) throw new Error("UNINSTANTIATED_CLASS");
-    await this.provider?.deleteAsset(assetId);
+    await this.getConfiguredProvider().deleteAsset(assetId);
   }
   async getAssetMetadata(assetId: string): Promise<uploadTypes.IAssetMetadata> {
-    if (this.provider == null) throw new Error("UNINSTANTIATED_CLASS");
-    return await this.provider.getAssetMetadata(assetId);
+    return this.getConfiguredProvider().getAssetMetadata(assetId);
   }
 }
 

@@ -13,6 +13,7 @@ import adminRouter from "./route/admin.route";
 import authRouter from "./route/auth.route";
 import userRouter from "./route/user.route";
 import courseRouter from "./route/course.route";
+import mediaAssetRouter from "./route/media-asset.route";
 dotenv.config({ path: "../.env" });
 
 const app: Express = express();
@@ -85,6 +86,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/media", mediaAssetRouter);
 
 app.use((req, res) => {
   res.status(404).json({

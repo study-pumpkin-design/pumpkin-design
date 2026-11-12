@@ -83,7 +83,7 @@ function DashboardSidebar() {
     <aside
       ref={sidebarRef}
       style={{ width: collapsed ? 76 : width }}
-      className={`relative flex h-dvh shrink-0 flex-col border-r border-foreground/10 bg-background ${isResizing ? "" : "transition-[width] duration-200 motion-reduce:transition-none"}`}
+      className={`relative flex h-full shrink-0 flex-col border-r border-foreground/10 bg-background ${isResizing ? "" : "transition-[width] duration-200 motion-reduce:transition-none"}`}
     >
       <div
         className={`flex h-20 mt-4 items-center border-b border-foreground/10 ${collapsed ? "justify-center px-2" : "justify-between px-4"}`}
@@ -118,7 +118,10 @@ function DashboardSidebar() {
         )}
       </div>
 
-      <nav aria-label="Main navigation" className="flex-1 px-3 py-4">
+      <nav
+        aria-label="Main navigation"
+        className="min-h-0 flex-1 overflow-y-auto px-3 py-4"
+      >
         {!collapsed && (
           <p className="mb-2 px-2 text-xs font-semibold text-foreground/55">
             Workspace
