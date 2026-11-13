@@ -10,6 +10,13 @@ class ModuleRepository {
     return db.module.findUnique({ where: { id } });
   }
 
+  async findWithContents(id: string) {
+    return db.module.findUnique({
+      where: { id },
+      include: { moduleContents: true },
+    });
+  }
+
   async update(id: string, data: courseTypes.UpdateModuleDTO) {
     return db.module.update({ where: { id }, data });
   }

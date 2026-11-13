@@ -16,14 +16,13 @@ class ModuleContentController {
       const module_id = req.params.moduleId as string;
       const data = this.parseCreateData(req.body, module_id);
       const content = await moduleContentService.create(data);
-      return res
-        .status(201)
-        .json({
-          data: content,
-          message: "Module content created successfully",
-          statusCode: 201,
-        });
+      return res.status(201).json({
+        data: content,
+        message: "Module content created successfully",
+        statusCode: 201,
+      });
     } catch (error: any) {
+      console.log(error);
       return this.respondWithError(res, error);
     }
   }
@@ -36,14 +35,13 @@ class ModuleContentController {
       if (Object.keys(data).length === 0)
         throw new Error("INCORRECT_INPUT_DATA");
       const content = await moduleContentService.update(id, data);
-      return res
-        .status(200)
-        .json({
-          data: content,
-          message: "Module content updated successfully",
-          statusCode: 200,
-        });
+      return res.status(200).json({
+        data: content,
+        message: "Module content updated successfully",
+        statusCode: 200,
+      });
     } catch (error: any) {
+      console.log(error);
       return this.respondWithError(res, error);
     }
   }
@@ -53,14 +51,13 @@ class ModuleContentController {
       const id = req.params.id as string;
       if (!id) throw new Error("INVALID_MODULE_CONTENT_ID");
       const content = await moduleContentService.delete(id);
-      return res
-        .status(200)
-        .json({
-          data: content,
-          message: "Module content deleted successfully",
-          statusCode: 200,
-        });
+      return res.status(200).json({
+        data: content,
+        message: "Module content deleted successfully",
+        statusCode: 200,
+      });
     } catch (error: any) {
+      console.log(error);
       return this.respondWithError(res, error);
     }
   }
@@ -115,15 +112,13 @@ class ModuleContentController {
       "INVALID_MODULE_ID",
       "INVALID_MODULE_CONTENT_ID",
     ].includes(error.message);
-    return res
-      .status(knownError ? 400 : 500)
-      .json({
-        data: null,
-        message: knownError
-          ? "Please check the lesson details."
-          : "Internal Server Error",
-        statusCode: knownError ? 400 : 500,
-      });
+    return res.status(knownError ? 400 : 500).json({
+      data: null,
+      message: knownError
+        ? "Please check the lesson details."
+        : "Internal Server Error",
+      statusCode: knownError ? 400 : 500,
+    });
   }
 }
 

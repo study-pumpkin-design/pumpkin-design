@@ -26,6 +26,29 @@ class MediaAssetService {
     return { ...asset, url: uploaded.url };
   }
 
+  /**
+   * Removes files only when no lesson field still references them. The database
+   * resource is intentionally deleted first by the caller, so failed storage
+   * cleanup remains retryable from the MediaAsset record instead of orphaning a
+   * file with no identifier.
+   */
+  async deleteUnusedAssets(ids: Array<string | null | undefined>) {
+    const uniqueIds = [
+      ...new Set(ids.filter((id): id is string => Boolean(id))),
+    ];
+    const assets = await mediaAssetRepository.findUnusedByIds(uniqueIds);
+
+    for (const asset of assets) {
+      const provider =
+        asset.storage_medium === "AWS"
+          ? uploadTypes.StorageProvider.AWS_S3
+          : uploadTypes.StorageProvider.CLOUDINARY;
+      await new MediaService(provider).deleteAsset(asset.assetId);
+    }
+
+    await mediaAssetRepository.deleteMany(assets.map((asset) => asset.id));
+  }
+
   private validateFile(file: Express.Multer.File, kind: MediaUploadKind) {
     if (!file) throw new Error("FILE_REQUIRED");
     if (kind === "video" && !file.mimetype.startsWith("video/"))

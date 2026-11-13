@@ -1,6 +1,7 @@
 import type { courseTypes } from "@sd/types";
 import courseRepository from "../repository/course.repository";
 import moduleRepository from "../repository/module.repository";
+import mediaAssetService from "./media-asset.service";
 
 class ModuleService {
   async create(data: courseTypes.CreateModuleDTO) {
@@ -14,8 +15,17 @@ class ModuleService {
   }
 
   async delete(id: string) {
-    await this.getById(id);
-    return moduleRepository.delete(id);
+    const module = await moduleRepository.findWithContents(id);
+    if (!module) throw new Error("INVALID_MODULE_ID");
+    const deleted = await moduleRepository.delete(id);
+    await mediaAssetService.deleteUnusedAssets(
+      module.moduleContents.flatMap((content) => [
+        content.attached_media,
+        content.video_content,
+        content.video_thumbnail,
+      ]),
+    );
+    return deleted;
   }
 
   async getById(id: string) {

@@ -1,5 +1,6 @@
 import type { courseTypes } from "@sd/types";
 import courseRepository from "../repository/course.repository";
+import mediaAssetService from "./media-asset.service";
 
 class CourseService {
   async createCourse(data: courseTypes.CreateCourseDTO) {
@@ -28,10 +29,18 @@ class CourseService {
     return await courseRepository.getAllCourse({});
   }
   async deleteCourse(courseId: string) {
-    const isValid = await this.doesCourseExist(courseId);
-    if (!isValid) throw new Error("INVALID_COURSE_ID");
-
-    return await courseRepository.deleteCourse(courseId);
+    const course = await courseRepository.getCourse({ id: courseId });
+    const deleted = await courseRepository.deleteCourse(courseId);
+    await mediaAssetService.deleteUnusedAssets(
+      course.modules.flatMap((module) =>
+        module.moduleContents.flatMap((content) => [
+          content.attached_media,
+          content.video_content,
+          content.video_thumbnail,
+        ]),
+      ),
+    );
+    return deleted;
   }
 
   private async doesCourseExist(courseId: string): Promise<boolean> {

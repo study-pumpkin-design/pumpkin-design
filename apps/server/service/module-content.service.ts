@@ -1,6 +1,7 @@
 import type { courseTypes } from "@sd/types";
 import moduleRepository from "../repository/module.repository";
 import moduleContentRepository from "../repository/module-content.repository";
+import mediaAssetService from "./media-asset.service";
 
 class ModuleContentService {
   async create(data: courseTypes.CreateModuleContentDTO) {
@@ -10,13 +11,34 @@ class ModuleContentService {
   }
 
   async update(id: string, data: courseTypes.UpdateModuleContentDTO) {
-    await this.getById(id);
-    return moduleContentRepository.update(id, data);
+    const existing = await this.getById(id);
+    const content = await moduleContentRepository.update(id, data);
+    await mediaAssetService.deleteUnusedAssets([
+      data.attached_media !== undefined &&
+      data.attached_media !== existing.attached_media
+        ? existing.attached_media
+        : null,
+      data.video_content !== undefined &&
+      data.video_content !== existing.video_content
+        ? existing.video_content
+        : null,
+      data.video_thumbnail !== undefined &&
+      data.video_thumbnail !== existing.video_thumbnail
+        ? existing.video_thumbnail
+        : null,
+    ]);
+    return content;
   }
 
   async delete(id: string) {
-    await this.getById(id);
-    return moduleContentRepository.delete(id);
+    const existing = await this.getById(id);
+    const content = await moduleContentRepository.delete(id);
+    await mediaAssetService.deleteUnusedAssets([
+      existing.attached_media,
+      existing.video_content,
+      existing.video_thumbnail,
+    ]);
+    return content;
   }
 
   async getById(id: string) {

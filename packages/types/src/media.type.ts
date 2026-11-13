@@ -1,5 +1,12 @@
+export interface UploadFile {
+  buffer: Uint8Array;
+  mimetype: string;
+  size: number;
+  originalname: string;
+}
+
 export interface IUploadAsset {
-  file: Express.Multer.File;
+  file: UploadFile;
   folder?: string;
   fileName?: string;
   contentType?: string;
